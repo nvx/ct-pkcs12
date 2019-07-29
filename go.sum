@@ -1,0 +1,4 @@
+github.com/natefinch/atomic v0.0.0-20150920032501-a62ce929ffcc h1:7xGrl4tTpBQu5Zjll08WupHyq+Sp0Z/adtyf1cfk3Q8=
+github.com/natefinch/atomic v0.0.0-20150920032501-a62ce929ffcc/go.mod h1:1rLVY/DWf3U6vSZgH16S7pymfrhK2lcUlXjgGglw/lY=
+software.sslmate.com/src/go-pkcs12 v0.0.0-20190322163127-6e380ad96778 h1:bAjNYCeISA/jECGqIIIgnjfmpW5MxAwF/yfmy4RQWQ8=
+software.sslmate.com/src/go-pkcs12 v0.0.0-20190322163127-6e380ad96778/go.mod h1:/xvNRWUqm0+/ZMiF4EX00vrSCMsE4/NHb+Pt3freEeQ=
