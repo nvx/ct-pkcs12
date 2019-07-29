@@ -17,7 +17,14 @@ script:
   - go test -v -race ./...
   - golangci-lint run
   - mkdir build
-  - gox -output="build/{{.Dir}}_{{.OS}}_{{.Arch}}"
+  - gox -output="build/{{.OS}}_{{.Arch}}/ct-pkcs12"
+  - |
+    cd build
+    for f in *; do
+      pushd "$f"
+      zip "../ct-pkcs12_$f.zip" "ct-pkcs12"
+      popd
+    done
 
 notifications:
   email: false
@@ -28,7 +35,7 @@ deploy:
   api_key:
     secure: Woml5Uvc2H8gsUBZs05W3COR6HPP8nNgQV+v1swx9KRvG0RWY9N4yKqZZycNgcHhNC67pYN9q57JYkT3rSxcZAAInYBBOAHYJxtBnPEljyZ4wAAVKXZ9q7ayM2MNMaOf523cb5NCbyORqEuaUcsNPLL6xERMxVzvk6Ieb27F9KrhTJnpX6xcacr1JErFqRiZE06b29madfbTpjb8E6WSUS+RjVSKpawT2+6spy6KGx5uWkNxMywyoO+daeDkcHUJn5yE60x76SemiMaTpAK2Z+n8PW0KJmSAcTm1EDcl6gCHOJjaXpAgLoAB4kbr7U3DKNDBDBW+e1aIo/fkfooP4/uTKvGh5O/Xz4oRg2jxn4+E/BP60B88dteurmuxbOe4HMAmVZ8zLTe/jzkd2Z/4qMTopdDoE8u3Hhn4RjeFyaSqVA9W0Rgn/cAjnANmWqtR/A/MYGOt/CXSVX2BUifnFtQceDXv8HGxCFFr6bJQtRGMhP5H0HgIISRSGlYJ048f51M6iMbyfuIUBR4hTTL5YeLMEqXDcBBqis7cqeLHHx8c6ythQHb43ItSmdt1rXXfvFkwIsxp/9sev1it3KChAjaOC2ZsUxGC/3cG+xlrcW2OIhZdFlq9M+PS0VpSf0rAAH+XU1e+HTsUldeqKCGHWbcgVNXfeM9VpxfwV81c40s=
   file_glob: true
-  file: build/*
+  file: build/*.zip
   on:
     repo: nvx/ct-pkcs12
     tags: true
