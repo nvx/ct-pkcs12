@@ -22,7 +22,7 @@ script:
     pushd build
     for f in *; do
       pushd "$f"
-      zip "../ct-pkcs12_$f.zip" "*"
+      zip -r "../ct-pkcs12_$f.zip" .
       popd
     done
     popd
