@@ -5,6 +5,7 @@ import (
 	"github.com/nvx/ct-pkcs12/plugin"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -27,17 +28,31 @@ func main() {
 	}
 
 	for _, arg := range os.Args[4:] {
-		var caPEM string
-		err = json.Unmarshal([]byte(arg), &caPEM)
-		if err != nil {
-			log.Fatal(err)
+		if len(arg) == 0 {
+			continue
 		}
 
 		if caPEMs != "" {
 			caPEMs += "\n"
 		}
 
-		caPEMs += caPEM
+		if arg[0] == '[' {
+			var caPEM []string
+			err = json.Unmarshal([]byte(arg), &caPEM)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			caPEMs += strings.Join(caPEM, "\n")
+		} else {
+			var caPEM string
+			err = json.Unmarshal([]byte(arg), &caPEM)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			caPEMs += caPEM
+		}
 	}
 
 	if certPEM == "" || keyPEM == "" {
